@@ -1,40 +1,24 @@
+HTML code
+
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>startmodel</title>
+    <title>Eva I</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        background-image: url('https://images.unsplash.com/photo-1501510913930-edc42f83723b');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        position: relative;
-        height: 100vh;
-      }
-      .medieval-gif {
-        position: fixed;
-        bottom: 10px;
-        right: 10px;
-        width: 150px;
-        z-index: 10;
-      }
-
-    <background="#d4d4d4">
-<H2>---</H2>
-  <model-viewer src="Mann.glb"
-                ios-src="Mann.usdz"
-                alt="Mann"
+  </head>
+  <body>
+<H2>Eva I</H2>
+  <model-viewer src="titos-cave.glb"
+                ios-src="titos-cave.usdz"
+                alt="Eva I"
                 ar
                 auto-rotate
                 camera-controls
                 ar-modes="webxr scene-viewer quick-look" 
                 environment-image="neutral">   
   </model-viewer>
-  <img src="https://media.tenor.com/lfS0ZIUFh-IAAAAC/medieval-knight.gif" alt="Medieval Knight" class="medieval-gif">
  <script>
         async function checkARCoreCompatibility() {
             const modelViewer = document.getElementById('model-viewer');
@@ -45,9 +29,8 @@
                 alert('Your device is not compatible with AR features. You can still view the 3D model.');
             }
         }
+
         document.addEventListener('DOMContentLoaded', checkARCoreCompatibility);
     </script>
    </body>
-      </style>
-  </head>    
 </html>
