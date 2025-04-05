@@ -16,7 +16,67 @@
         font-family: 'Inknut Antiqua', serif;
         height: 100vh;
         margin: 0;
+        position: relative;
+        overflow-x: hidden;
       }
+
+      /* Marderfüße Animation */
+      .marder-footprints {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      .footprint {
+        position: absolute;
+        width: 20px;
+        height: 30px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 30'%3E%3Cpath d='M10,2 C12,2 14,4 14,6 C14,8 12,10 10,10 C8,10 6,8 6,6 C6,4 8,2 10,2 Z M5,12 C6.5,12 7.5,13.5 7.5,15 C7.5,16.5 6.5,18 5,18 C3.5,18 2.5,16.5 2.5,15 C2.5,13.5 3.5,12 5,12 Z M15,12 C16.5,12 17.5,13.5 17.5,15 C17.5,16.5 16.5,18 15,18 C13.5,18 12.5,16.5 12.5,15 C12.5,13.5 13.5,12 15,12 Z M8,20 C9.5,20 10.5,21.5 10.5,23 C10.5,24.5 9.5,26 8,26 C6.5,26 5.5,24.5 5.5,23 C5.5,21.5 6.5,20 8,20 Z M12,20 C13.5,20 14.5,21.5 14.5,23 C14.5,24.5 13.5,26 12,26 C10.5,26 9.5,24.5 9.5,23 C9.5,21.5 10.5,20 12,20 Z' fill='rgba(50, 50, 50, 0.5)'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+        animation: walk 15s linear infinite;
+        opacity: 0.8;
+      }
+
+      .footprint:nth-child(1) { top: 10%; animation-delay: 0s; }
+      .footprint:nth-child(2) { top: 30%; animation-delay: -3s; }
+      .footprint:nth-child(3) { top: 50%; animation-delay: -6s; }
+      .footprint:nth-child(4) { top: 70%; animation-delay: -9s; }
+      .footprint:nth-child(5) { top: 90%; animation-delay: -12s; }
+
+      @keyframes walk {
+        0% {
+          left: -50px;
+          transform: rotate(30deg);
+        }
+        25% {
+          transform: rotate(30deg);
+        }
+        26% {
+          transform: rotate(-30deg);
+        }
+        50% {
+          transform: rotate(-30deg);
+        }
+        51% {
+          transform: rotate(30deg);
+        }
+        75% {
+          transform: rotate(30deg);
+        }
+        76% {
+          transform: rotate(-30deg);
+        }
+        100% {
+          left: calc(100% + 50px);
+          transform: rotate(-30deg);
+        }
+      }
+
       model-viewer {
         width: 80%;
         height: 50%; /* Ensures it takes 50% of the screen height */
@@ -25,37 +85,45 @@
         margin: 20px 0;
         background-color: rgba(255, 255, 255, 0.05); /* White with 15% transparency */
         flex-shrink: 0; /* Prevents shrinking of the model-viewer */
-     .text-box {
-  width: 80%; /* Same width as model-viewer */
-  padding: 20px;
-  margin: 20px 0;
-  background-color: rgba(255, 255, 255, 0.05); /* White with 15% transparency */
-  max-width: 800px; /* Sets a maximum width of 800px */
-  color: black;
-  text-align: left;
-  box-sizing: border-box; /* Ensures padding doesn't affect width */
-  margin-bottom: 20px;
-}
-.text-box p {
-  text-shadow: 
-    -0.3px -0.3px 0 #fff,
-    0.3px -0.3px 0 #fff,
-    -0.3px 0.3px 0 #fff,
-    0.3px 0.3px 0 #fff;
-}
-h2 {
-  margin: 10;
-  padding: 10px;
-  color: black;
-  text-shadow: 
-    -0.5px -0.5px 0 #fff,
-    0.5px -0.5px 0 #fff,
-    -0.5px 0.5px 0 #fff,
-    0.5px 0.5px 0 #fff;
-}
+      }
+      .text-box {
+        width: 80%; /* Same width as model-viewer */
+        padding: 20px;
+        margin: 20px 0;
+        background-color: rgba(255, 255, 255, 0.05); /* White with 15% transparency */
+        max-width: 800px; /* Sets a maximum width of 800px */
+        color: black;
+        text-align: left;
+        box-sizing: border-box; /* Ensures padding doesn't affect width */
+        margin-bottom: 20px;
+        text-shadow: 
+          -0.3px -0.3px 0 #fff,
+          0.3px -0.3px 0 #fff,
+          -0.3px 0.3px 0 #fff,
+          0.3px 0.3px 0 #fff;
+      }
+      h2 {
+        margin: 10;
+        padding: 10px;
+        color: black;
+        text-shadow: 
+          -0.5px -0.5px 0 #fff,
+          0.5px -0.5px 0 #fff,
+          -0.5px 0.5px 0 #fff,
+          0.5px 0.5px 0 #fff;
+      }
     </style>
   </head>
   <body>
+    <!-- Marderfüße-Animationsschicht -->
+    <div class="marder-footprints">
+      <div class="footprint"></div>
+      <div class="footprint"></div>
+      <div class="footprint"></div>
+      <div class="footprint"></div>
+      <div class="footprint"></div>
+    </div>
+
     <H2>GESELLSCHAFT FOR MARDER-HOUSING</H2>
     <model-viewer src="Maderhaus.final.Zwischenstand.glb"
                   ios-src="Maderhaus.final.Zwischenstand.usdz"
