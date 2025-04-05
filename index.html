@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR model Jesse</title>
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <!-- Google Fonts einbinden -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700&display=swap">
     <style>
       body {
-        background-image: url("Marder.Hintergrund.jpg");        
+        background-image: url("Marder.Hintergrund.jpg");
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -20,7 +19,6 @@
         overflow-x: hidden;
       }
 
-      /* Marderfüße Animation */
       .marder-footprints {
         position: absolute;
         top: 0;
@@ -49,86 +47,63 @@
       .footprint:nth-child(5) { top: 90%; animation-delay: -12s; }
 
       @keyframes walk {
-        0% {
-          left: -50px;
-          transform: rotate(30deg);
-        }
-        25% {
-          transform: rotate(30deg);
-        }
-        26% {
-          transform: rotate(-30deg);
-        }
-        50% {
-          transform: rotate(-30deg);
-        }
-        51% {
-          transform: rotate(30deg);
-        }
-        75% {
-          transform: rotate(30deg);
-        }
-        76% {
-          transform: rotate(-30deg);
-        }
-        100% {
-          left: calc(100% + 50px);
-          transform: rotate(-30deg);
-        }
+        0% { left: -50px; transform: rotate(30deg); }
+        25% { transform: rotate(30deg); }
+        26% { transform: rotate(-30deg); }
+        50% { transform: rotate(-30deg); }
+        51% { transform: rotate(30deg); }
+        75% { transform: rotate(30deg); }
+        76% { transform: rotate(-30deg); }
+        100% { left: calc(100% + 50px); transform: rotate(-30deg); }
       }
 
       model-viewer {
         width: 80%;
-        height: 50%; /* Ensures it takes 50% of the screen height */
-        min-height: 300px; /* Sets a minimum height of 300px */
-        max-width: 800px; /* Sets a maximum width of 800px */
+        height: 50%;
+        min-height: 300px;
+        max-width: 800px;
         margin: 20px 0;
-        background-color: rgba(255, 255, 255, 0.05); /* White with 15% transparency */
-        flex-shrink: 0; /* Prevents shrinking of the model-viewer */
+        background-color: rgba(255, 255, 255, 0.05);
+        flex-shrink: 0;
       }
-   .text-box {
-  position: relative;
-  width: 80%;
-  padding: 20px;
-  margin: 20px 0;
-  background-color: rgba(255, 255, 255, 0.05);
-  max-width: 800px;
-  color: white;
-  text-align: left;
-  box-sizing: border-box;
-  margin-bottom: 5px;
-  font-size: 1rem;
-  line-height: 1.4;
-}
 
-.text-box::before {
-  content: attr(data-text);
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  right: 20px;
-  color: transparent;
-  -webkit-text-stroke: 1.5px white;
-  white-space: pre-wrap;
-  pointer-events: none;
-  z-index: 0;
-}
+      .text-box {
+        position: relative;
+        width: 80%;
+        padding: 20px;
+        margin: 20px 0;
+        background-color: rgba(255, 255, 255, 0.05);
+        max-width: 800px;
+        color: white;
+        text-align: left;
+        font-size: 1rem;
+        line-height: 1.4;
+        letter-spacing: normal;
+        box-sizing: border-box;
+        z-index: 1;
+      }
 
-  /* NEU: Reduziert zu viel Abstand im Text */
-  letter-spacing: normal;           /* Kein übermäßiger Zeichenabstand */
-  line-height: 1.4;                 /* Kompaktere Zeilenhöhe */
-  -webkit-text-stroke-width: 0.5px; /* Deutlich dezenterer Stroke */
-  -webkit-text-stroke-color: white;
-}
+      .text-box::before {
+        content: attr(data-text);
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        color: transparent;
+        -webkit-text-stroke: 1.5px white;
+        white-space: pre-wrap;
+        pointer-events: none;
+        z-index: -1;
+      }
+
       h2 {
-        margin: 10;
+        margin: 10px;
         padding: 10px;
         color: black;
       }
     </style>
   </head>
   <body>
-    <!-- Marderfüße-Animationsschicht -->
     <div class="marder-footprints">
       <div class="footprint"></div>
       <div class="footprint"></div>
@@ -137,21 +112,29 @@
       <div class="footprint"></div>
     </div>
 
-    <H2>GESELLSCHAFT FOR MARDER-HOUSING</H2>
+    <h2>GESELLSCHAFT FOR MARDER-HOUSING</h2>
+
     <model-viewer src="Maderhaus.final.Zwischenstand.glb"
                   ios-src="Maderhaus.final.Zwischenstand.usdz"
                   alt="BRAT Cave"
                   ar
                   auto-rotate
                   camera-controls
-                  ar-modes="webxr scene-viewer quick-look" 
-                  environment-image="neutral">   
+                  ar-modes="webxr scene-viewer quick-look"
+                  environment-image="neutral">
     </model-viewer>
+
     <div class="text-box">
       Auf dem Dachboden über meiner Wohnung lebt ein Marder. Nachts macht er Lärm und hinterlässt sein Geschäft auf dem Boden. Wenn ich nachts aus dem Schlaf gerissen werde und ihn über den Boden laufen höre oder das Scharren vernehme, frage ich mich, ob er nicht irgendwo anders ein besseres Zuhause finden könnte. Es hat fast schon etwas Geisterhaftes. Deshalb baue ich nun für ihn in meinem Projekt ein neues Heim – nur 100 Meter entfernt, direkt an der Elbe.
-Der Marderbau wird mit verschiedenen Objekten ausgestattet, die das Leben des Marders verschönern sollen. Eine nagelneue Tauchausrüstung für Marder, damit er auch mal ins Wasser kann – schließlich sind Marder oft Wassertiere und halten sich gerne in der Nähe von Seen, Flüssen und Wäldern auf, trauen sich aber auch in die Stadt. Zudem sind Marder für ihre Neigung bekannt, mit ihren scharfen Zähnen an allem Möglichen zu kauen – besonders an Kabeln.
-Mit einem 3D-Scan habe ich den alten Dachboden abgescannt, damit der Marder auch sein gewohntes Umfeld im neuen Zuhause mitnehmen kann. Die Räucherstäbchen und kleinen Gaben, die ich für ihn bereitstelle, sollen eine Anspielung auf die thailändische Hausgeisterkultur sein. Dort stellt man oft einen kleinen Tempel neben das Haus und bringt Gaben dar, um die Geister der früheren Bewohner zu besänftigen und ihnen eine neue Unterkunft zu schenken.
-Das Mardermobil wird ihm helfen, ein wenig durch die Stadt oder seinen neuen Bau zu fahren – eine kleine Freude für den Marder. Und wenn es draußen kalt wird und er lieber zuhause bleibt, kann er ein bisschen im Marderrad Sport treiben.
+      Der Marderbau wird mit verschiedenen Objekten ausgestattet, die das Leben des Marders verschönern sollen. Eine nagelneue Tauchausrüstung für Marder, damit er auch mal ins Wasser kann – schließlich sind Marder oft Wassertiere und halten sich gerne in der Nähe von Seen, Flüssen und Wäldern auf, trauen sich aber auch in die Stadt. Zudem sind Marder für ihre Neigung bekannt, mit ihren scharfen Zähnen an allem Möglichen zu kauen – besonders an Kabeln.
+      Mit einem 3D-Scan habe ich den alten Dachboden abgescannt, damit der Marder auch sein gewohntes Umfeld im neuen Zuhause mitnehmen kann. Die Räucherstäbchen und kleinen Gaben, die ich für ihn bereitstelle, sollen eine Anspielung auf die thailändische Hausgeisterkultur sein. Dort stellt man oft einen kleinen Tempel neben das Haus und bringt Gaben dar, um die Geister der früheren Bewohner zu besänftigen und ihnen eine neue Unterkunft zu schenken.
+      Das Mardermobil wird ihm helfen, ein wenig durch die Stadt oder seinen neuen Bau zu fahren – eine kleine Freude für den Marder. Und wenn es draußen kalt wird und er lieber zuhause bleibt, kann er ein bisschen im Marderrad Sport treiben.
     </div>
+
+    <script>
+      // Automatisch den Text in data-text übernehmen
+      const box = document.querySelector('.text-box');
+      box.setAttribute('data-text', box.innerText.trim());
+    </script>
   </body>
 </html>
