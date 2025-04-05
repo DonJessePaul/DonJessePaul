@@ -86,16 +86,33 @@
         background-color: rgba(255, 255, 255, 0.05); /* White with 15% transparency */
         flex-shrink: 0; /* Prevents shrinking of the model-viewer */
       }
-      .text-box {
+   .text-box {
+  position: relative;
   width: 80%;
   padding: 20px;
   margin: 20px 0;
   background-color: rgba(255, 255, 255, 0.05);
   max-width: 800px;
-  color: black;
+  color: white;
   text-align: left;
   box-sizing: border-box;
   margin-bottom: 5px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.text-box::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  color: transparent;
+  -webkit-text-stroke: 1.5px white;
+  white-space: pre-wrap;
+  pointer-events: none;
+  z-index: 0;
+}
 
   /* NEU: Reduziert zu viel Abstand im Text */
   letter-spacing: normal;           /* Kein übermäßiger Zeichenabstand */
@@ -107,8 +124,6 @@
         margin: 10;
         padding: 10px;
         color: black;
- -webkit-text-stroke-width: 3px;
-  -webkit-text-stroke-color: white;
       }
     </style>
   </head>
