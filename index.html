@@ -7,16 +7,40 @@
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700&display=swap">
     <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+
       body {
-        background-image: url("Marder.Hintergrund.jpg");
+        position: relative;
+        font-family: 'Inknut Antiqua', serif;
         display: flex;
         flex-direction: column;
         align-items: center;
-        font-family: 'Inknut Antiqua', serif;
-        height: 100vh;
-        margin: 0;
-        position: relative;
-        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("Marder.Hintergrund.jpg");
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: -1;
+      }
+
+      @media (max-width: 768px) {
+        body::before {
+          background-size: cover;
+          background-attachment: fixed;
+        }
       }
 
       .marder-footprints {
@@ -57,24 +81,31 @@
         100% { left: calc(100% + 50px); transform: rotate(-30deg); }
       }
 
+      .content-container {
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
       model-viewer {
-        width: 80%;
-        height: 50%;
+        width: 100%;
+        height: 50vh;
         min-height: 300px;
-        max-width: 800px;
         margin: 20px 0;
         background-color: rgba(255, 255, 255, 0.05);
-        flex-shrink: 0;
       }
 
       .text-box {
         position: relative;
-        width: 80%;
+        width: 100%;
         padding: 20px;
         margin: 20px 0;
         background-color: rgba(255, 255, 255, 0.05);
-        max-width: 800px;
-        color: black; /* Textfarbe auf schwarz geändert */
+        color: black;
         text-align: left;
         font-size: 1rem;
         line-height: 1.4;
@@ -91,7 +122,7 @@
         width: 100%;
         height: 100%;
         color: transparent;
-        text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white; /* Weißes Leuchten hinter der Schrift */
+        text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white;
         white-space: pre-wrap;
         pointer-events: none;
         z-index: -1;
@@ -101,12 +132,13 @@
       }
 
       h2 {
-        margin: 10px;
+        margin: 10px 0;
         padding: 10px;
         color: black;
         position: relative;
         z-index: 1;
         font-family: 'Inknut Antiqua', serif;
+        text-align: center;
       }
 
       h2::before {
@@ -114,9 +146,27 @@
         position: absolute;
         top: 0;
         left: 0;
+        width: 100%;
         color: transparent;
-        text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white; /* Weißes Leuchten hinter der Schrift */
+        text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white, 0 0 40px white;
         z-index: -1;
+      }
+
+      /* AR status and loading indicators */
+      .poster {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(240, 240, 240, 0.3);
+      }
+
+      .progress-bar {
+        width: 0%;
+        height: 5px;
+        background-color: rgba(0, 128, 0, 0.5);
+        transition: width 0.3s;
       }
     </style>
   </head>
@@ -129,29 +179,48 @@
       <div class="footprint"></div>
     </div>
 
-    <h2 data-text="GESELLSCHAFT FOR MARDER-HOUSING">GESELLSCHAFT FOR MARDER-HOUSING</h2>
+    <div class="content-container">
+      <h2 data-text="GESELLSCHAFT FOR MARDER-HOUSING">GESELLSCHAFT FOR MARDER-HOUSING</h2>
 
-    <model-viewer src="Maderhaus.final.Zwischenstand.glb"
+      <model-viewer src="Maderhaus.final.Zwischenstand.glb"
                   ios-src="Maderhaus.final.Zwischenstand.usdz"
                   alt="Marderhaus"
                   ar
                   auto-rotate
                   camera-controls
                   ar-modes="webxr scene-viewer quick-look"
-                  environment-image="neutral">
-    </model-viewer>
+                  environment-image="neutral"
+                  loading="eager"
+                  reveal="interaction"
+                  ar-status="not-presenting">
+        <div slot="progress-bar" class="progress-bar"></div>
+      </model-viewer>
 
-    <div class="text-box">
-      Auf dem Dachboden über meiner Wohnung lebt ein Marder. Nachts macht er Lärm und hinterlässt sein Geschäft auf dem Boden. Wenn ich nachts aus dem Schlaf gerissen werde und ihn über den Boden laufen höre oder das Scharren vernehme, frage ich mich, ob er nicht irgendwo anders ein besseres Zuhause finden könnte. Es hat fast schon etwas Geisterhaftes. Deshalb baue ich nun für ihn in meinem Projekt ein neues Heim – nur 100 Meter entfernt, direkt an der Elbe.
-      Der Marderbau wird mit verschiedenen Objekten ausgestattet, die das Leben des Marders verschönern sollen. Eine nagelneue Tauchausrüstung für Marder, damit er auch mal ins Wasser kann – schließlich sind Marder oft Wassertiere und halten sich gerne in der Nähe von Seen, Flüssen und Wäldern auf, trauen sich aber auch in die Stadt. Zudem sind Marder für ihre Neigung bekannt, mit ihren scharfen Zähnen an allem Möglichen zu kauen – besonders an Kabeln.
-      Mit einem 3D-Scan habe ich den alten Dachboden abgescannt, damit der Marder auch sein gewohntes Umfeld im neuen Zuhause mitnehmen kann. Die Räucherstäbchen und kleinen Gaben, die ich für ihn bereitstelle, sollen eine Anspielung auf die thailändische Hausgeisterkultur sein. Dort stellt man oft einen kleinen Tempel neben das Haus und bringt Gaben dar, um die Geister der früheren Bewohner zu besänftigen und ihnen eine neue Unterkunft zu schenken.
-      Das Mardermobil wird ihm helfen, ein wenig durch die Stadt oder seinen neuen Bau zu fahren – eine kleine Freude für den Marder. Und wenn es draußen kalt wird und er lieber zuhause bleibt, kann er ein bisschen im Marderrad Sport treiben.
+      <div class="text-box">
+        Auf dem Dachboden über meiner Wohnung lebt ein Marder. Nachts macht er Lärm und hinterlässt sein Geschäft auf dem Boden. Wenn ich nachts aus dem Schlaf gerissen werde und ihn über den Boden laufen höre oder das Scharren vernehme, frage ich mich, ob er nicht irgendwo anders ein besseres Zuhause finden könnte. Es hat fast schon etwas Geisterhaftes. Deshalb baue ich nun für ihn in meinem Projekt ein neues Heim – nur 100 Meter entfernt, direkt an der Elbe.
+        Der Marderbau wird mit verschiedenen Objekten ausgestattet, die das Leben des Marders verschönern sollen. Eine nagelneue Tauchausrüstung für Marder, damit er auch mal ins Wasser kann – schließlich sind Marder oft Wassertiere und halten sich gerne in der Nähe von Seen, Flüssen und Wäldern auf, trauen sich aber auch in die Stadt. Zudem sind Marder für ihre Neigung bekannt, mit ihren scharfen Zähnen an allem Möglichen zu kauen – besonders an Kabeln.
+        Mit einem 3D-Scan habe ich den alten Dachboden abgescannt, damit der Marder auch sein gewohntes Umfeld im neuen Zuhause mitnehmen kann. Die Räucherstäbchen und kleinen Gaben, die ich für ihn bereitstelle, sollen eine Anspielung auf die thailändische Hausgeisterkultur sein. Dort stellt man oft einen kleinen Tempel neben das Haus und bringt Gaben dar, um die Geister der früheren Bewohner zu besänftigen und ihnen eine neue Unterkunft zu schenken.
+        Das Mardermobil wird ihm helfen, ein wenig durch die Stadt oder seinen neuen Bau zu fahren – eine kleine Freude für den Marder. Und wenn es draußen kalt wird und er lieber zuhause bleibt, kann er ein bisschen im Marderrad Sport treiben.
+      </div>
     </div>
 
     <script>
       // Automatisch den Text in data-text übernehmen
       const box = document.querySelector('.text-box');
       box.setAttribute('data-text', box.innerText.trim());
+
+      // H2 Element data-text Attribut setzen
+      const heading = document.querySelector('h2');
+      heading.setAttribute('data-text', heading.innerText.trim());
+      
+      // AR error handling
+      const modelViewer = document.querySelector('model-viewer');
+      modelViewer.addEventListener('ar-status', (event) => {
+        if (event.detail.status === 'failed') {
+          console.error('AR mode failed to start:', event.detail.error);
+          alert('AR-Modus konnte nicht gestartet werden. Bitte versuchen Sie es auf einem kompatiblen Gerät erneut.');
+        }
+      });
     </script>
   </body>
 </html>
